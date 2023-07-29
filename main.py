@@ -22,7 +22,6 @@ def _getRGBFrame(cap):
     if not ret:
         print("error reading frame")
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    print("rgb_frame preso")
     return rgb_frame
 
 def _detectFace(rgb_frame, bgr_image):
@@ -32,7 +31,6 @@ def _detectFace(rgb_frame, bgr_image):
         for top, right, bottom, left in face_locations:
             cv2.rectangle(bgr_frame, (left, top), (right, bottom), (0, 0, 255), 2)
             print("face detected")
-            cv2.imshow('facciabell', bgr_frame)
     else:
         print("face doesn't detected")
     return bgr_frame
@@ -40,7 +38,6 @@ def _detectFace(rgb_frame, bgr_image):
 
 def _waitEnter(cap,out):
     if cv2.waitKey(1) == 13:
-        print("exiting")
         cap.release()
         out.release()
         return True
@@ -58,7 +55,8 @@ if __name__=="__main__":
     fps = int(cap.get(cv2.CAP_PROP_FPS))
 
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter("C:/Users/loren/Downloads/test.mp4", fourcc, fps, (width, height))
+    path = input("Insert path to save the video")
+    out = cv2.VideoWriter(path, fourcc, fps, (width, height))
 
     while cap.isOpened():
         print("dentro while")
