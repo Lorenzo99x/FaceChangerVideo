@@ -3,9 +3,9 @@ import face_recognition
 import numpy
 
 
-def _readFromIPCamera():
-    IP = "192.168.1.34"
-    PORT = "8080"
+def _readFromIPCamera(ip, port):
+    IP = ip
+    PORT = port
     url = f"http://{IP}:{PORT}/video"
     cap = cv2.VideoCapture(url)
     return cap
@@ -50,8 +50,9 @@ def _waitEnter(cap,out):
 if __name__=="__main__":
 
     face_locations = []
-
-    cap = _readFromIPCamera()
+    ip = input("Insert the IP")
+    port = input("Insert port")
+    cap = _readFromIPCamera(ip, port)
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
